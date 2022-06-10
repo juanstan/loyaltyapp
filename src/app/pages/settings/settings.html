@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Settings</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item lines="full">
+      <ion-label position="floating">Initial Latitude</ion-label>
+      <ion-input type="number" formControlName="initialLat" class="form-control"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Initial Longitude</ion-label>
+      <ion-input type="number" formControlName="initialLng" class="form-control"></ion-input>
+    </ion-item>
+    <!-- Radio buttons -->
+    <ion-list lines="full">
+      <ion-radio-group formControlName="mode">
+        <ion-list-header>
+          <ion-label>Dark Mode</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>On</ion-label>
+          <ion-radio value="dark" checked></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Off</ion-label>
+          <ion-radio value="light"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <!-- Checkboxes -->
+    <!--<ion-list lines="full">
+      <ion-list-header>
+        <ion-label>Points of Interests</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let interest of interests; let i=index">
+        <ion-label>{{interest.name}}</ion-label>
+        <ion-checkbox [value]="interest.value" (ionChange)="onCheckboxChange($event)" class="form-control"></ion-checkbox>
+      </ion-item>
+    </ion-list>-->
+    <ion-item>
+      <ion-label>Prefer Template</ion-label>
+      <ion-select value="satellite" okText="Okay" cancelText="Dismiss" formControlName="mapBoxTemplate" class="form-control">
+        <ion-select-option value="satellite" >Satellite</ion-select-option>
+        <ion-select-option value="navigation">Navigation</ion-select-option>
+        <ion-select-option value="streets">Streets</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-content class="overlay overlay-show">
+  <div class="login-logo">
+    <img src="assets/img/marine-logo.png" alt="Ionic logo">
+    <h1 class="title-login">
+      <span>Marine Tracker</span>
+    </h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">First Name</ion-label>
+        <ion-input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Last Name</ion-label>
+        <ion-input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Email</ion-label>
+        <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Password</ion-label>
+        <ion-input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Password Confirmation</ion-label>
+        <ion-input type="text" formControlName="password_confirmation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password_confirmation.errors }">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+      <div *ngIf="f.first_name.errors.required">First Name is required</div>
+    </div>
+    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+      <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+    </div>
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors.required">Email is required</div>
+    </div>
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+    </div>
+    <div *ngIf="submitted && f.password_confirmation.errors" class="invalid-feedback">
+      <div *ngIf="f.password_confirm.errors.required">Password confirmation is required</div>
+    </div>
+
+    <div class="form-btn-login">
+      <button [disabled]="loading" class="btn btn-primary btn-modern">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Register
+      </button>
+      <a routerLink="../login" class="btn btn-primary btn-modern" >Cancel</a>
+    </div>
+
+  </form>
+
+</ion-content>

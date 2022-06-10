@@ -1,0 +1,89 @@
+ion-content{
+  --background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/assets/img/marine-bg.webp') no-repeat center center / cover;
+  height: 100vh!important;
+
+  .login-logo {
+    position: relative;
+    z-index: 3;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    .title-login {
+      font-family: poppins, Arial, sans-serif;
+      font-size: 35.75px;
+      font-weight: 200;
+      letter-spacing: -1.7875px;
+      line-height: 42.9px;
+    }
+  }
+
+  ion-list{
+    --ion-background-color: transparent;
+    ion-item {
+      --highlight-color-valid: transparent;
+      --highlight-color-invalid: transparent;
+      --highlight-color-focused: none;
+      --color: white;
+      .item-native{
+        --ion-background-color: white;
+        --ion-color: white;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: #bfa888;
+    border-color: #bfa888;
+    color: #fff;
+    letter-spacing: .25em;
+    border-radius: 0;
+    --color: #bfa888;
+    --hover: #00a1f2;
+    --disabled: #bfa888;
+    --active: #006ea6;
+  }
+
+  .btn-outline.btn-primary {
+    color: #bfa888;
+    background-color: transparent;
+    background-image: none;
+    border-color: #bfa888;
+    float: right;
+  }
+
+  .btn-modern {
+    text-transform: uppercase;
+    font-size: 1em;
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+    font-weight: 600;
+    margin-top: 0.5rem!important;
+  }
+
+  .btn-outline{
+    border-width: 2px;
+  }
+
+  .form-btn-login {
+    margin-top:20px;
+    text-align: center;
+    .btn, a{
+      margin: 10px;
+      padding:5px;
+      text-decoration: none;
+      width: 100px;
+      height:50px;
+    }
+  }
+
+}
+
+.login-logo img {
+  max-width: 150px;
+}
+
+.list {
+  margin-bottom: 0;
+}
+
+
