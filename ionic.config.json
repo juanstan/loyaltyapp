@@ -1,5 +1,5 @@
 {
-  "name": "ionic-tracking-app",
+  "name": "loyalty-app",
   "type": "angular",
   "integrations": {
     "cordova": {},

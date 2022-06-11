@@ -1,11 +1,23 @@
 ion-content{
-  --background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/assets/img/marine-bg.webp') no-repeat center center / cover;
+  --ion-background-color:radial-gradient(180% 140% at bottom, #3E9E88 55%, white 45%) !important;
   height: 100vh!important;
+
+  .content-login {
+    top: 12%;
+    position: relative;
+    h1 {
+      margin-top: 20px;
+      font-size: 40px;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+    }
+  }
 
   .login-logo {
     position: relative;
     z-index: 3;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
     color: white;
     .title-login {
@@ -19,71 +31,56 @@ ion-content{
 
   ion-list{
     --ion-background-color: transparent;
-    ion-item {
-      --highlight-color-valid: transparent;
-      --highlight-color-invalid: transparent;
-      --highlight-color-focused: none;
-      --color: white;
-      .item-native{
-        --ion-background-color: white;
-        --ion-color: white;
+    ion-item.item {
+      background-color: white;
+      width: 60%;
+      height: 40px;
+      margin: auto;
+      border-radius: 25px;
+      border-radius: 25px;
+      &:first-child {
+        margin-bottom: 15px;
+      }
+      .label {
+        width: 10%;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 1.2em;
+      }
+      ion-input {
+        --background: white;
+        text-align: center;
       }
     }
   }
 
-  .btn-primary {
-    background-color: #bfa888;
-    border-color: #bfa888;
-    color: #fff;
-    letter-spacing: .25em;
-    border-radius: 0;
-    --color: #bfa888;
-    --hover: #00a1f2;
-    --disabled: #bfa888;
-    --active: #006ea6;
-  }
-
-  .btn-outline.btn-primary {
-    color: #bfa888;
-    background-color: transparent;
-    background-image: none;
-    border-color: #bfa888;
-    float: right;
-  }
-
-  .btn-modern {
-    text-transform: uppercase;
-    font-size: 1em;
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
-    font-weight: 600;
-    margin-top: 0.5rem!important;
-  }
-
-  .btn-outline{
-    border-width: 2px;
-  }
-
-  .form-btn-login {
-    margin-top:20px;
-    text-align: center;
-    .btn, a{
-      margin: 10px;
-      padding:5px;
-      text-decoration: none;
-      width: 100px;
-      height:50px;
+  :host ::ng-deep .native-input {
+    --background: white !important;
+    &.sc-ion-input-md:-webkit-autofill {
+      --background: white !important;
     }
   }
 
 }
 
 .login-logo img {
-  max-width: 150px;
+  max-width: 90%;
 }
 
 .list {
   margin-bottom: 0;
 }
 
+.forgot-your-password {
+  text-align: center;
+  color:white;
+  margin-top:20px;
+}
+
+.right-reserved {
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
 

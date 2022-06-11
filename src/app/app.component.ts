@@ -19,12 +19,17 @@ import {StorageService} from './core/services/storage.service';
 export class AppComponent implements OnInit {
   appPages = [
     {
-      title: 'Account',
+      title: 'Home',
+      url: '/',
+      icon: 'home'
+    },
+    {
+      title: 'My Profile',
       url: '/app/tabs/account',
       icon: 'person'
     },
     {
-      title: 'About Marine Tracker',
+      title: 'About Yalla Rewards',
       url: '/app/tabs/about',
       icon: 'information-circle'
     },
@@ -55,25 +60,6 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     this.checkLoginStatus();
 
-    this.swUpdate.available.subscribe(async res => {
-      const toast = await this.toastCtrl.create({
-        message: 'Update available!',
-        position: 'bottom',
-        buttons: [
-          {
-            role: 'cancel',
-            text: 'Reload'
-          }
-        ]
-      });
-
-      await toast.present();
-
-      toast
-        .onDidDismiss()
-        .then(() => this.swUpdate.activateUpdate())
-        .then(() => window.location.reload());
-    });
   }
 
   initializeApp() {
@@ -91,10 +77,15 @@ export class AppComponent implements OnInit {
       return this.router.navigateByUrl('/login');
     }
 
+    this.loggedIn = true;
     await this.accountService.loadAllData().subscribe();
 
-    return;
+  }
 
+  checkLogout(title) {
+    if (title === 'Logout') {
+      this.accountService.logout();
+    }
   }
 
   logout() {

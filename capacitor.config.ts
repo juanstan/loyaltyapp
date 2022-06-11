@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'ionic-tracking-app',
+  appId: 'io.loyalty.starter',
+  appName: 'loyalty-app',
   webDir: 'www',
   bundledWebRuntime: false,
   cordova: {

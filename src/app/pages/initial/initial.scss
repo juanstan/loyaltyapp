@@ -1,0 +1,23 @@
+ion-header {
+  --background: var(--ion-color-favorite);
+  opacity: 0.5;
+}
+
+ion-toolbar {
+  --background: transparent;
+}
+
+ion-title, ion-menu-button {
+  --color: white;
+}
+
+ion-content{
+  --ion-background-color:white;
+  height: 100vh!important;
+  // --background: beige;
+
+  .geo-logo {
+    text-align: center;
+  }
+
+}

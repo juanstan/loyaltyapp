@@ -37,6 +37,12 @@ export class LoginPage implements OnInit {
 
   get f() { return this.form.controls; }
 
+  keypress(event) {
+    if (event.keyCode === 13) {
+      this.onSubmit();
+    }
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -52,7 +58,7 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: async () => {
           await this.accountService.loadAllData().subscribe(data => {
-            this.router.navigateByUrl('/app/tabs/map');
+            this.router.navigateByUrl('/');
           });
         },
         error: response => {

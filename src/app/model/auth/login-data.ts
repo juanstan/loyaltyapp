@@ -1,5 +1,5 @@
 export class LoginData {
-    email_address: string;
+    email: string;
     password: string;
     device_id: string;
 }

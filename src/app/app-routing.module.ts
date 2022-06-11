@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTutorial } from './providers/check-tutorial.service';
-import {AuthGuard} from './core/guards/auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/app/tabs/map',
-    pathMatch: 'full'
-  },
   /*{
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
@@ -30,9 +23,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
   {
-    path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule),
-    canLoad: [CheckTutorial]
+    path: '',
+    loadChildren: () => import('./pages/initial/initial.module').then(m => m.InitialModule)
   }
 ];
 

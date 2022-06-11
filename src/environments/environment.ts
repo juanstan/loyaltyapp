@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  apiUrl: 'https://app-api.marine-tracker.com/api',
+  apiUrl: 'https://loyalty.bondly.io/api',
   mapbox: {
     accessToken: 'pk.eyJ1IjoianVhbnN0YW4iLCJhIjoiY2wwbmd4OHJ1MWJhZzNicXRrZzJpY3JlciJ9.Xoyr3G5e_tCy_ZAsTv4aeQ',
     icon: {

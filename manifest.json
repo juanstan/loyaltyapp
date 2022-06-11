@@ -1,6 +1,6 @@
 {
-  "name": "Tracking Marine",
-  "short_name": "Tracking Marine",
+  "name": "Loyalty App",
+  "short_name": "Loyalty",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [

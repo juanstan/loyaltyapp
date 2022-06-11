@@ -8,8 +8,6 @@ import {User} from '../model/user';
 import {LoginResult} from '../model/auth/login-result';
 import {StorageService} from '../core/services/storage.service';
 import {Observable} from 'rxjs';
-import {VesselService} from './vessel.service';
-import Echo from 'laravel-echo';
 
 
 @Injectable({ providedIn: 'root' })
@@ -22,8 +20,7 @@ export class AccountService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private storageService: StorageService,
-    private vesselService: VesselService
+    private storageService: StorageService
   ) { }
 
   async init(): Promise<LoginResult> {
@@ -33,7 +30,6 @@ export class AccountService {
           return this.logout();
         }
         this.user = login.user;
-        this.listenData();
         return this.loginObj = login;
       }
     );
@@ -48,18 +44,21 @@ export class AccountService {
     return this.loginObj?.user;
   }
 
-  public get tokenValue(): string {
-    return this.loginObj?.access_token;
+  public set userValue(user: User) {
+    this.user = user;
   }
 
-  public login(username, password): Observable<User> {
-    return this.http.post<LoginResult>(`${environment.apiUrl}/auth/login`, { email: username, password })
+  public get tokenValue(): string {
+    return this.loginObj?.token;
+  }
+
+  public login(username, password): Observable<LoginResult> {
+    return this.http.post<LoginResult>(`${environment.apiUrl}/auth/login`, { email: username, password, locale: 'english', remember: true })
       .pipe(
         map(login => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.storageService.set('login', login);
-          this.loginObj = login;
-          return login.user;
+          this.loginObj = {token: login.token} ;
+          return login;
         })
       );
   }
@@ -125,43 +124,12 @@ export class AccountService {
   }
 
   loadAllData(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/me/start`).pipe(
-      take(1),
-      map((data: any) => {
-        this.vesselService.allVessels = data.data.vessels;
-        if (this.vesselService.allVessels.length === 1) {
-          this.vesselService.setVesselSelected(this.vesselService.allVessels[0].id);
-        }
-      })
-    );
+    return this.http.get(`${environment.apiUrl}/auth/user`).pipe(map((data: {data: User, status: string }) => {
+      if (data.status === 'success') {
+        this.loginObj.user = this.userValue = data.data;
+        this.storageService.set('login', this.loginObj);
+      }
+    }));
   }
 
-  listenData() {
-    this.echo = new Echo({
-      broadcaster: 'pusher',
-      key: 'myKey',
-      wsHost: 'webping.geotracks.co.uk',
-      wsPort: 8450,
-      disableStats: true,
-      encrypted: false,
-      forceTLS: false,
-      enabledTransports: ['ws'],
-      namespace: 'Libs.Events'
-    });
-
-    /*this.echo.connector.socket.on('connect', () => console.log('CONNECTED'));
-    this.echo.connector.socket.on('reconnecting', () => console.log('CONNECTING'));
-    this.echo.connector.socket.on('disconnect', () => console.log('DISCONNECTED'));*/
-
-    this.echo.channel(`MT-User-${this.user.id}`)
-      .listen('TrackingPing', (data) => {
-        this.vesselService.allVessels = this.vesselService.allVessels.map(vessel => {
-          if (vessel.id === data.vesselId) {
-            vessel.lat = data.lat;
-            vessel.lng = data.lng;
-          }
-          return vessel;
-        });
-      });
-  }
 }

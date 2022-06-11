@@ -1,11 +1,17 @@
 export class User {
   id: string;
-  first_name: string;
-  last_name: string;
+  uuid: string;
+  name: string;
   email: string;
-  phone: string;
-  address: string;
-  email_verified_at: Date;
-  created_at: Date;
-  updated_at: Date;
+  role: number;
+  avatar: string;
+  currency: string;
+  timezone: string;
+  language: string;
+  locale: Date;
+  customer_count?: number;
+  demo?: number;
+  expires_at?: string;
+  plan_id?: string;
+  plan_name?: string;
 }
