@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {map, take} from 'rxjs/operators';
+import {catchError, map, switchMap, take} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
 import {User} from '../model/user';
 import {LoginResult} from '../model/auth/login-result';
 import {StorageService} from '../core/services/storage.service';
 import {Observable} from 'rxjs';
+import {snapshot} from '../shared/utils/snapshot.util';
+import {HistoryService} from './history.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +22,8 @@ export class AccountService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private historyService: HistoryService
   ) { }
 
   async init(): Promise<LoginResult> {
@@ -53,7 +56,7 @@ export class AccountService {
   }
 
   public login(username, password): Observable<LoginResult> {
-    return this.http.post<LoginResult>(`${environment.apiUrl}/auth/login`, { email: username, password, locale: 'english', remember: true })
+    return this.http.post<LoginResult>(`${environment.apiUrl}/auth/login`, { email: username, password, locale: 'en', remember: true })
       .pipe(
         map(login => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -124,12 +127,22 @@ export class AccountService {
   }
 
   loadAllData(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/auth/user`).pipe(map((data: {data: User, status: string }) => {
-      if (data.status === 'success') {
-        this.loginObj.user = this.userValue = data.data;
-        this.storageService.set('login', this.loginObj);
-      }
+    return this.http.get<{data: any, status: string}>(`${environment.apiUrl}/auth/user`).pipe(
+      switchMap(data => {
+        return this.http.post(`${environment.apiUrl}/app/customerbyuser`, {id: data.data.id}).pipe(
+          map((user: any) => {
+            this.loginObj.user = this.userValue = user;
+            this.historyService.allHistories = user.history;
+            this.storageService.set('login', this.loginObj);
+          })
+        );
+    }),
+    catchError(errorForFirstOrSecondCall => {
+      console.error('An error occurred: ', errorForFirstOrSecondCall);
+      // if you want to handle this error and return some empty data use:
+      throw new Error('Error: ' + errorForFirstOrSecondCall.message);
     }));
+
   }
 
 }

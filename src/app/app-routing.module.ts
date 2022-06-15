@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  /*{
-    path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
-  },*/
+  {
+    path: '',
+    redirectTo: '/app/tabs/home',
+    pathMatch: 'full'
+  },
   {
     path: 'support',
     loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
@@ -21,10 +22,6 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
-  },
-  {
-    path: '',
-    loadChildren: () => import('./pages/initial/initial.module').then(m => m.InitialModule)
   }
 ];
 

@@ -13,15 +13,15 @@
     <h2>{{user.email}}</h2>
     <ion-list inset>
       <ion-item>
-        <ion-label color="secondary" position="fixed">Name:</ion-label>
+        <ion-label color="secondary" position="fixed" class="color-site">Name:</ion-label>
         {{user.name}}
       </ion-item>
       <ion-item>
-        <ion-label color="secondary" position="fixed">Email:</ion-label>
+        <ion-label color="secondary" position="fixed" class="color-site">Email:</ion-label>
         {{user.email}}
       </ion-item>
       <ion-item>
-        <ion-label color="secondary" position="fixed">Role:</ion-label>
+        <ion-label color="secondary" position="fixed" class="color-site">Role:</ion-label>
         {{user.role}}
       </ion-item>
       <ion-item (click)="logout()">Logout</ion-item>

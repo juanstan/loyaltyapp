@@ -18,6 +18,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'store',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../store/store.module').then(m => m.StoreModule)
+          }
+        ]
+      },
+      {
         path: 'account',
         children: [
           {
@@ -27,9 +36,8 @@ const routes: Routes = [
         ]
       },
       {
-        path: '',
-        redirectTo: '/app/tabs/schedule',
-        pathMatch: 'full'
+        path: 'home',
+        loadChildren: () => import('../initial/initial.module').then(m => m.InitialModule)
       }
     ]
   }

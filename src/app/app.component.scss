@@ -41,16 +41,20 @@ ion-menu.md ion-item {
 }
 
 ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+  //--background: rgba(var(--ion-color-primary-rgb), 0.14);
+  --background: #3E9E88;
+  --color: white;
 }
 
 ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+  // color: var(--ion-color-primary);
+  color: white;
 }
 
 ion-menu.md ion-list-header,
 ion-menu.md ion-item ion-icon {
   color: var(--ion-color-step-650, #5f6368);
+  // color: white;
 }
 
 ion-menu.md ion-list:not(:last-of-type) {

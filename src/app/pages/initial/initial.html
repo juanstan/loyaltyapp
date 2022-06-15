@@ -1,8 +1,57 @@
-<ion-content class="overlay overlay-show">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button color="dark"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title class="color-site">History</ion-title>
   </ion-toolbar>
+</ion-header>
+
+<ion-content class="overlay overlay-show">
+  <div class="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="left">
+            <div class="header">Points available</div>
+            <div class="value">{{user.available_points}}</div>
+          </div>
+        </ion-col>
+        <ion-col class="left-10">
+          <div class="right">
+            <div class="header">Balance Points</div>
+            <div class="value">{{user.balance}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row *ngFor="let history of histories$ | async" class="record-row">
+        <ion-col>
+          <div class="header-history color-site">
+            <span class="time right-space">{{history.updated_at | date:'mediumDate'}} - </span>
+            <span class="reason" [ngSwitch]="history.event_id">
+              <span *ngSwitchCase="1">Online shopping</span>
+              <span *ngSwitchCase="2">Cancel Points</span>
+              <span *ngSwitchCase="3">Redeem Points</span>
+              <span *ngSwitchCase="4">Signup</span>
+            </span>
+          </div>
+          <div class="top-space-item" *ngIf="history.items?.length > 0">
+            <div *ngFor="let item of history.items">
+              <span class="item-id">1.</span>
+              <span class="item">O'neill Standard zip hoodie</span>
+            </div>
+          </div>
+          <div class="top-space-item">
+            <span class="currency right-space">AED<!--{{history.currency_id}}--></span>
+            <span class="money color-site right-space">{{history.shopping_value || '-' }}</span>
+            <span class="points-earned right-space">Points earned</span>
+            <span class="points color-site">{{history.points}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

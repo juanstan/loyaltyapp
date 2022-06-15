@@ -1,23 +1,54 @@
-ion-header {
-  --background: var(--ion-color-favorite);
-  opacity: 0.5;
+ion-toolbar{
+  --background: #3E9E88;
 }
-
-ion-toolbar {
-  --background: transparent;
-}
-
 ion-title, ion-menu-button {
   --color: white;
 }
-
 ion-content{
   --ion-background-color:white;
   height: 100vh!important;
+  margin: 10px;
+  .container{
+    margin: 10px;
+  }
   // --background: beige;
 
   .geo-logo {
     text-align: center;
+  }
+
+  .header{
+    color: #3E9E88;
+    font-size: 20px;
+  }
+
+  .value{
+    color: #a9a9a9;
+    font-size: 44px;
+    margin-top: 10px;
+  }
+
+  .color-site{
+    color: #3E9E88;
+  }
+
+  .left{
+    float: left;
+  }
+
+  .right{
+    float: right;
+  }
+
+  .record-row{
+    border-bottom: 2px #ccc solid;
+    padding:5px 0;
+    .top-space-item{
+      padding-top: 8px;
+    }
+    .right-space {
+      padding-right: 5px;
+    }
   }
 
 }

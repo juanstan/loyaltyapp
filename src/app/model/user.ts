@@ -14,4 +14,6 @@ export class User {
   expires_at?: string;
   plan_id?: string;
   plan_name?: string;
+  available_points?: number;
+  balance?: number;
 }

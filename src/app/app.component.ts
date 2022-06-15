@@ -18,16 +18,16 @@ import {StorageService} from './core/services/storage.service';
 })
 export class AppComponent implements OnInit {
   appPages = [
-    {
+    /*{
       title: 'Home',
       url: '/',
       icon: 'home'
-    },
-    {
+    },*/
+    /*{
       title: 'My Profile',
       url: '/app/tabs/account',
       icon: 'person'
-    },
+    },*/
     {
       title: 'About Yalla Rewards',
       url: '/app/tabs/about',
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.checkLoginStatus();
+    await this.checkLoginStatus();
 
   }
 
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
     }
 
     this.loggedIn = true;
-    await this.accountService.loadAllData().subscribe();
+    return await this.accountService.loadAllData().subscribe();
 
   }
 

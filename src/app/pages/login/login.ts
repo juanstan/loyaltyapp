@@ -56,8 +56,8 @@ export class LoginPage implements OnInit {
 
     this.accountService.login(this.f.username.value, this.f.password.value).pipe(first())
       .subscribe({
-        next: async () => {
-          await this.accountService.loadAllData().subscribe(data => {
+        next: async (data) => {
+          await this.accountService.loadAllData().subscribe((user) => {
             this.router.navigateByUrl('/');
           });
         },
