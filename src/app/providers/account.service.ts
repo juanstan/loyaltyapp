@@ -10,6 +10,9 @@ import {StorageService} from '../core/services/storage.service';
 import {Observable} from 'rxjs';
 import {snapshot} from '../shared/utils/snapshot.util';
 import {HistoryService} from './history.service';
+import * as moment from 'moment';
+import {History} from '../model/history';
+import {ProgramService} from './program.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +26,8 @@ export class AccountService {
     private router: Router,
     private http: HttpClient,
     private storageService: StorageService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private programService: ProgramService
   ) { }
 
   async init(): Promise<LoginResult> {
@@ -60,8 +64,11 @@ export class AccountService {
       .pipe(
         map(login => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.loginObj = {token: login.token} ;
-          return login;
+          this.loginObj = {
+            token: login.token,
+            last_login: moment().format()
+          } ;
+          return this.loginObj;
         })
       );
   }
@@ -127,16 +134,27 @@ export class AccountService {
   }
 
   loadAllData(): Observable<any> {
-    return this.http.get<{data: any, status: string}>(`${environment.apiUrl}/auth/user`).pipe(
-      switchMap(data => {
-        return this.http.post(`${environment.apiUrl}/app/customerbyuser`, {id: data.data.id}).pipe(
-          map((user: any) => {
-            this.loginObj.user = this.userValue = user;
-            this.historyService.allHistories = user.history;
-            this.storageService.set('login', this.loginObj);
+    return this.http.get<{programID: number}>(`${environment.apiUrl}/app/getprogram/${environment.program}`).pipe(
+      switchMap(program => {
+        return this.http.get<{data: any, status: string}>(`${environment.apiUrl}/auth/user`).pipe(
+          switchMap(dataUser => {
+            return this.http.post<User>(`${environment.apiUrl}/app/customerbyuser`, {id: dataUser.data.id}).pipe(
+              switchMap(dataCustomer => {
+                return this.http.get(`${environment.apiUrl}/app/customer/${dataCustomer.uuid}`).pipe(
+                  map((customer: any) => {
+                    this.loginObj.user = this.userValue = dataCustomer;
+                    const programInfo = customer.programs.find(pro => pro.id === program.programID);
+                    this.programService.program$.next(programInfo);
+                    this.historyService.allHistories = programInfo.histories;
+                    this.storageService.set('program', programInfo);
+                    this.storageService.set('login', this.loginObj);
+                  })
+                );
+              })
+            );
           })
         );
-    }),
+      }),
     catchError(errorForFirstOrSecondCall => {
       console.error('An error occurred: ', errorForFirstOrSecondCall);
       // if you want to handle this error and return some empty data use:

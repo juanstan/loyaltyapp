@@ -9,18 +9,18 @@
 
 <ion-content class="overlay overlay-show">
   <div class="container">
-    <ion-grid>
+    <ion-grid *ngIf="(program$ | async) as program">
       <ion-row>
         <ion-col>
           <div class="left">
             <div class="header">Points available</div>
-            <div class="value">{{user.available_points}}</div>
+            <div class="value">{{program.points_earned}}</div>
           </div>
         </ion-col>
         <ion-col class="left-10">
           <div class="right">
-            <div class="header">Balance Points</div>
-            <div class="value">{{user.balance}}</div>
+            <div class="header">Points spent</div>
+            <div class="value">{{program.points_balance - program.points_redeem}}</div>
           </div>
         </ion-col>
       </ion-row>

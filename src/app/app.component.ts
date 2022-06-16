@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UserData } from './providers/user-data';
 import {AccountService} from './providers/account.service';
 import {StorageService} from './core/services/storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -75,6 +76,12 @@ export class AppComponent implements OnInit {
 
     if (!this.accountService.userValue) {
       return this.router.navigateByUrl('/login');
+    }
+
+    if (this.accountService.loginObj.last_login) {
+      if (moment(this.accountService.loginObj.last_login).isSameOrAfter(moment().add(4, 'hours'))) {
+        this.accountService.logout();
+      }
     }
 
     this.loggedIn = true;

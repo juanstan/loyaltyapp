@@ -5,6 +5,8 @@ import {History} from '../../model/history';
 import {User} from '../../model/user';
 import {AccountService} from '../../providers/account.service';
 import {snapshot} from '../../shared/utils/snapshot.util';
+import {ProgramService} from '../../providers/program.service';
+import {Program} from '../../model/program';
 
 @Component({
   selector: 'page-initial',
@@ -14,17 +16,20 @@ import {snapshot} from '../../shared/utils/snapshot.util';
 export class InitialPage implements OnInit {
 
   histories$: Observable<History[]>;
+  program$: Observable<Program>;
   user: User;
 
   constructor(
     private historyService: HistoryService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private programService: ProgramService
   ) {
     this.user = this.accountService.userValue;
   }
 
   ngOnInit() {
     this.histories$ = this.historyService.getHistoriesObservable();
+    this.program$ = this.programService.getProgramObservable();
 
   }
 
