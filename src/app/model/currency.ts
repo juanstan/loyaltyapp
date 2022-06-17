@@ -1,8 +1,7 @@
-export class Program {
+export class Currency {
   id: number;
   name: string;
-  currencies: [];
-  created_by?: number;
+  code: string;
   created_at?: string;
   deleted_by?: number;
   deleted_at?: string;

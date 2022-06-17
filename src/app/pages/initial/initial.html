@@ -45,8 +45,8 @@
             </div>
           </div>
           <div class="top-space-item">
-            <span class="currency right-space">AED<!--{{history.currency_id}}--></span>
-            <span class="money color-site right-space">{{history.shopping_value || '-' }}</span>
+            <span class="currency right-space">{{checkCurrency(history.currency_id)}}</span>
+            <span class="money color-site right-space">{{history.shopping_value || '' }}</span>
             <span class="points-earned right-space">Points earned</span>
             <span class="points color-site">{{history.points}}</span>
           </div>

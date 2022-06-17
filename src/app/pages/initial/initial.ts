@@ -7,6 +7,8 @@ import {AccountService} from '../../providers/account.service';
 import {snapshot} from '../../shared/utils/snapshot.util';
 import {ProgramService} from '../../providers/program.service';
 import {Program} from '../../model/program';
+import {tap} from 'rxjs/operators';
+import {Currency} from '../../model/currency';
 
 @Component({
   selector: 'page-initial',
@@ -18,6 +20,7 @@ export class InitialPage implements OnInit {
   histories$: Observable<History[]>;
   program$: Observable<Program>;
   user: User;
+  currencies: Currency[];
 
   constructor(
     private historyService: HistoryService,
@@ -29,8 +32,14 @@ export class InitialPage implements OnInit {
 
   ngOnInit() {
     this.histories$ = this.historyService.getHistoriesObservable();
-    this.program$ = this.programService.getProgramObservable();
+    this.program$ = this.programService.getProgramObservable().pipe(tap(program => {
+      this.currencies = program?.currencies;
+    }));
 
+  }
+
+  checkCurrency(currency_id) {
+    return this.currencies.find(currency => currency.id === currency_id)?.code;
   }
 
 
