@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
         },
         error: response => {
           for (const key in response.error) {
-           response.error[key].map(item => {
+           response.error[key]?.map(item => {
              this.alertService.error(item);
            });
           }

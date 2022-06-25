@@ -8,5 +8,11 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-
+  <ion-row *ngFor="let store of stores$ | async" class="record-row">
+    <ion-col>
+      <div class="header-history color-site">
+        {{store.name}}
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>

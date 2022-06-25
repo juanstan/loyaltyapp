@@ -24,14 +24,15 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.accountService.tokenValue) {
-      this.router.navigateByUrl('/app/tabs/map');
-      return;
-    }
     this.form = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
+      dob: ['', Validators.required],
+      country: ['', Validators.required],
+      region: ['', Validators.required],
+      city: ['', Validators.required],
       password_confirmation: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });

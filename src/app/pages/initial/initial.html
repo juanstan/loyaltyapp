@@ -26,8 +26,8 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid>
-      <ion-row *ngFor="let history of histories$ | async" class="record-row">
+    <ion-grid *ngIf="histories$ | async as histories; else indicator">
+      <ion-row *ngFor="let history of histories" class="record-row">
         <ion-col>
           <div class="header-history color-site">
             <span class="time right-space">{{history.updated_at | date:'mediumDate'}} - </span>
@@ -54,4 +54,8 @@
       </ion-row>
     </ion-grid>
   </div>
+
+  <ng-template #indicator>
+    <div>Loading</div>
+  </ng-template>
 </ion-content>

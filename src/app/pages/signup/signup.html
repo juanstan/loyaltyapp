@@ -19,8 +19,38 @@
         </ion-input>
       </ion-item>
       <ion-item lines="full">
+        <ion-label color="light" position="fixed">Phone Number</ion-label>
+        <ion-input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
         <ion-label color="light" position="fixed">Email</ion-label>
         <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Date of Birth</ion-label>
+        <ion-input type="text" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Gender</ion-label>
+        <ion-input type="text" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Country</ion-label>
+        <ion-input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">Region</ion-label>
+        <ion-input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label color="light" position="fixed">City</ion-label>
+        <ion-input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
         </ion-input>
       </ion-item>
       <ion-item lines="full">

@@ -1,5 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {StoreService} from '../../providers/store.service';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {Store} from '../../model/store';
+import {Observable} from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -9,12 +13,15 @@ import { Router } from '@angular/router';
 })
 export class StorePage implements OnInit {
 
+  stores$: Observable<Store[]>;
+
   constructor(
-    public router: Router
+    public router: Router,
+    private storeService: StoreService
   ) { }
 
   ngOnInit() {
-    console.log('test');
+    this.stores$ = this.storeService.requestStores();
   }
 
 

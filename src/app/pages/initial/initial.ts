@@ -7,7 +7,7 @@ import {AccountService} from '../../providers/account.service';
 import {snapshot} from '../../shared/utils/snapshot.util';
 import {ProgramService} from '../../providers/program.service';
 import {Program} from '../../model/program';
-import {tap} from 'rxjs/operators';
+import {delay, finalize, tap} from 'rxjs/operators';
 import {Currency} from '../../model/currency';
 
 @Component({
@@ -21,12 +21,14 @@ export class InitialPage implements OnInit {
   program$: Observable<Program>;
   user: User;
   currencies: Currency[];
+  loaded: boolean;
 
   constructor(
     private historyService: HistoryService,
     private accountService: AccountService,
     private programService: ProgramService
   ) {
+    this.loaded = false;
     this.user = this.accountService.userValue;
   }
 
