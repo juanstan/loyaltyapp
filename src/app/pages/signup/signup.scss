@@ -1,19 +1,16 @@
 ion-content{
-  --background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/assets/img/marine-bg.webp') no-repeat center center / cover;
+  --ion-background-color:radial-gradient(180% 168% at bottom, #3E9E88 55%, white 45%) !important;
   height: 100vh!important;
 
-  .login-logo {
+  .content-login {
+    top: 4%;
     position: relative;
-    z-index: 3;
-    padding: 20px 0;
-    text-align: center;
-    color: white;
-    .title-login {
-      font-family: poppins, Arial, sans-serif;
-      font-size: 35.75px;
-      font-weight: 200;
-      letter-spacing: -1.7875px;
-      line-height: 42.9px;
+    h1 {
+      margin-top: 20px;
+      font-size: 25px;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
     }
   }
 
@@ -69,17 +66,22 @@ ion-content{
     text-align: center;
     .btn, a{
       margin: 10px;
-      padding:5px;
+      padding:17px;
       text-decoration: none;
-      width: 125px;
       height:50px;
+      border-radius: 10px;
+      background-color: white;
+      color: #3E9E88;
     }
   }
 
 }
 
 .login-logo img {
-  max-width: 150px;
+  width: 230px;
+  margin: auto;
+  display: block;
+  margin-top:5px;
 }
 
 .list {

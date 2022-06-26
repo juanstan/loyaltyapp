@@ -1,57 +1,96 @@
 <ion-content class="overlay overlay-show">
   <div class="login-logo">
-    <img src="assets/img/marine-logo.png" alt="Ionic logo">
-    <h1 class="title-login">
-      <span>Marine Tracker</span>
-    </h1>
+    <img src="assets/img/logo.svg" alt="Ionic logo">
   </div>
 
+  <div class="content-login">
+    <h1 class="title-login">
+      <span>Register</span>
+    </h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">First Name</ion-label>
-        <ion-input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+        <ion-input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Last Name</ion-label>
-        <ion-input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+        <ion-input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Phone Number</ion-label>
-        <ion-input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <ion-input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Email</ion-label>
-        <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Date of Birth</ion-label>
-        <ion-input type="text" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </ion-input>
+        <ion-input
+          value="{{ f.date_of_birth.value | date: 'dd.mm.yyyy' }}"
+          id="date"
+          class="ion-text-start"
+        ></ion-input>
+        <ion-popover trigger="date" size="cover">
+          <ng-template>
+            <ion-datetime
+              presentation="date"
+              locale="en-uk"
+              formControlName="date_of_birth"
+              [max]=getTodayUTC()
+              show-default-buttons="true"
+              (ionChange)="getData($event)"
+            ></ion-datetime>
+          </ng-template>
+        </ion-popover>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Gender</ion-label>
-        <ion-input type="text" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </ion-input>
+        <ion-select value="{{ f.gender.value}}" okText="Okay" cancelText="Dismiss" formControlName="gender" class="form-control">
+          <ion-select-option value="male" >Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="other">Other</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Country</ion-label>
-        <ion-input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </ion-input>
+        <ion-select
+          value="{{ f.country.value}}"
+          okText="Okay"
+          cancelText="Dismiss"
+          formControlName="country"
+          class="form-control"
+          (ionChange)="loadRegion($event)">
+          <ion-select-option value="{{country.id}}" *ngFor="let country of countries$ | async">{{country.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Region</ion-label>
-        <ion-input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </ion-input>
+        <ion-select
+          value="{{ f.region.value}}"
+          okText="Okay"
+          cancelText="Dismiss"
+          formControlName="region"
+          class="form-control"
+          (ionChange)="loadCity($event)">
+          <ion-select-option value="{{region.id}}" *ngFor="let region of regions$ | async">{{region.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">City</ion-label>
-        <ion-input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </ion-input>
+        <ion-select
+          value="{{ f.city.value}}"
+          okText="Okay"
+          cancelText="Dismiss"
+          formControlName="city"
+          class="form-control">
+          <ion-select-option value="{{city.id}}" *ngFor="let city of cities$ | async">{{city.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item lines="full">
         <ion-label color="light" position="fixed">Password</ion-label>
@@ -86,9 +125,10 @@
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Register
       </button>
-      <a routerLink="../login" class="btn btn-primary btn-modern" >Cancel</a>
+      <a routerLink="/login" class="btn btn-primary btn-modern" >Cancel</a>
     </div>
 
   </form>
+  </div>
 
 </ion-content>
