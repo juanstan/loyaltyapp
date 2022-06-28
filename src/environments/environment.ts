@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'https://loyalty.bondly.io/api',
-  program: 'Yalla'
+  program: 'Yalla',
+  program_id: 2
 };
 
 /*

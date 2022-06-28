@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, switchMap, take} from 'rxjs/operators';
+import {catchError, first, map, switchMap, take} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
 import {User} from '../model/user';
@@ -13,6 +13,7 @@ import {HistoryService} from './history.service';
 import * as moment from 'moment';
 import {History} from '../model/history';
 import {ProgramService} from './program.service';
+import {Program} from '../model/program';
 
 
 @Injectable({ providedIn: 'root' })
@@ -28,7 +29,9 @@ export class AccountService {
     private storageService: StorageService,
     private historyService: HistoryService,
     private programService: ProgramService
-  ) { }
+  ) {
+
+  }
 
   async init(): Promise<LoginResult> {
     return await this.storageService.get('login').then(
@@ -87,13 +90,16 @@ export class AccountService {
 
   register(user) {
     const obj = {
-      first_name: user.first_name,
-      last_name: user.last_name,
+      name: user.first_name + ' ' + user.last_name,
+      gender: user.gender,
       email: user.email,
+      date_of_birth: user.date_of_birth,
       password: user.password,
-      password_confirmation: user.password_confirmation
+      password_confirmation: user.password_confirmation,
+      program_id: environment.program_id
     };
-    return this.http.post(`${environment.apiUrl}/auth/register`, obj);
+
+    return this.http.post(`${environment.apiUrl}/customer/save`, obj);
   }
 
   getAll() {
