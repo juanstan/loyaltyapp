@@ -1,9 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {StoreService} from '../../providers/store.service';
-import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Store} from '../../model/store';
 import {Observable} from 'rxjs/internal/Observable';
+import {first, map} from 'rxjs/operators';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -13,7 +14,8 @@ import {Observable} from 'rxjs/internal/Observable';
 })
 export class StorePage implements OnInit {
 
-  stores$: Observable<Store[]>;
+  stores$: Observable<[{id: number, name: string, stores: Store[]}]>;
+  storesByProgram;
 
   constructor(
     public router: Router,
@@ -21,7 +23,13 @@ export class StorePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.stores$ = this.storeService.requestStores();
+    this.stores$ = this.storeService.requestStoresBusinessByProgram();
+    this.storeService.requestStoresByProgram().pipe(
+      first(),
+      map(data => {
+        this.storesByProgram =  _.groupBy(data, store => store.business_name);
+      })
+    ).subscribe();
   }
 
 

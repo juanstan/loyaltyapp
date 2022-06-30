@@ -37,11 +37,22 @@ export class StoreService {
 
   }
 
-  public requestStores(): Observable<Store[]> {
-    return this.http.get<{data: any}>(`${environment.apiUrl}/stores`).pipe(
+  public requestStoresBusinessByProgram(): Observable<[{id: number, name: string, stores: Store[]}]> {
+    return this.http.get<{places: [{id: number, name: string, stores: Store[]}] }>(`${environment.apiUrl}/brandsbyprogram/${environment.program_id}`).pipe(
       map(data => {
-        this.stores = data.data;
-        return this.stores;
+        return data?.places;
+      }),
+      catchError((err, caught) => {
+        console.log(err);
+        return EMPTY;
+      })
+    );
+  }
+
+  public requestStoresByProgram(): Observable<any[]> {
+    return this.http.get<{stores: any[]}>(`${environment.apiUrl}/storesbyprogram/${environment.program_id}`).pipe(
+      map(data => {
+        return data?.stores;
       }),
       catchError((err, caught) => {
         console.log(err);

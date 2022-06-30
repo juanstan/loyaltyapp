@@ -13,6 +13,7 @@ import {RegionService} from '../../providers/region.service';
 import {Region} from '../../model/region';
 import {CityService} from '../../providers/city.service';
 import {City} from '../../model/city';
+import {FormControlValidators} from '../../shared/utils/form-validators';
 
 @Component({
   templateUrl: 'signup.html',
@@ -21,7 +22,7 @@ import {City} from '../../model/city';
 export class SignupComponent implements OnInit {
   form: FormGroup;
   loading = false;
-  submitted = false;
+  submitted: boolean;
   date_of_birth: Date;
   todayDate: string;
   countries$: Observable<Country[]>;
@@ -40,6 +41,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.submitted = false;
     this.form = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -52,6 +54,12 @@ export class SignupComponent implements OnInit {
       date_of_birth: ['', Validators.required],
       password_confirmation: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
+    },
+    {
+      validator: FormControlValidators.match(
+      'password',
+      'password_confirmation'
+      ),
     });
 
     this.getCountries();
