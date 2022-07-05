@@ -7,6 +7,9 @@ export class Store {
   region: string;
   country: string;
   email: string;
+  address1: string;
+  address2: string;
+  phone: string;
   created_by?: number;
   created_at?: string;
   deleted_by?: number;

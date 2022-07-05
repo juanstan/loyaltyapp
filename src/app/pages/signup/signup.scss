@@ -107,3 +107,8 @@ ion-content{
 .is-invalid {
   border: 1px red solid;
 }
+
+.form-container {
+  overflow-y: scroll;
+  height: calc(100vh - 127px);
+}

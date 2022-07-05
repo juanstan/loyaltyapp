@@ -18,7 +18,24 @@
             </div>
           </ion-item>
           <div class="ion-padding" slot="content" *ngFor="let store of business.stores">
-            <div>{{store.name}}</div>
+            <div>
+              <div class="name-store" *ngIf="store.name">{{store.name}}
+                <a [href]="'https://www.google.com/maps/search/?api=1&query='+getGoogleLink(store)">
+                  <img src="assets/img/marker-icon-orange.png" width="12.5" height="20.5" />
+                </a>
+              </div>
+              <div class="info-rest">
+                <div><span class="info-column">Email: </span><span *ngIf="store.email">{{store.email}}</span></div>
+                <div><span class="info-column">Phone: </span><span *ngIf="store.phone">{{store.phone}}</span></div>
+                <div>
+                  <span class="info-column">Address: </span>
+                  <span *ngIf="store.address1">{{store.address1}}</span>
+                  <span>{{store.address2}}</span>
+                  <span *ngIf="store.city"><span *ngIf="store.address1">, </span>{{store.city}}</span>
+                  <span *ngIf="store.country"> {{store.country}}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </ion-accordion>
       </ion-accordion-group>
@@ -34,7 +51,24 @@
             </div>
           </ion-item>
           <div class="ion-padding" slot="content" *ngFor="let store of business.value">
-            <div>{{store.name}}</div>
+            <div>
+              <div class="name-store" *ngIf="store.name">{{store.name}}
+                <a [href]="'https://www.google.com/maps/search/?api=1&query='+getGoogleLink(store)">
+                  <img src="assets/img/marker-icon-orange.png" width="12.5" height="20.5" />
+                </a>
+              </div>
+              <div class="info-rest">
+                <div><span class="info-column">Email: </span><span *ngIf="store.email">{{store.email}}</span></div>
+                <div><span class="info-column">Phone: </span><span *ngIf="store.phone">{{store.phone}}</span></div>
+                <div>
+                  <span class="info-column">Address: </span>
+                  <span *ngIf="store.address1">{{store.address1}}</span>
+                  <span>{{store.address2}}</span>
+                  <span *ngIf="store.city"><span *ngIf="store.address1">, </span>{{store.city}}</span>
+                  <span *ngIf="store.country"> {{store.country}}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </ion-accordion>
       </ion-accordion-group>

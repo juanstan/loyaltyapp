@@ -96,7 +96,8 @@ export class AccountService {
       date_of_birth: user.date_of_birth,
       password: user.password,
       password_confirmation: user.password_confirmation,
-      program_id: environment.program_id
+      program_id: environment.program_id,
+      active: 0
     };
 
     return this.http.post(`${environment.apiUrl}/customer/save`, obj);

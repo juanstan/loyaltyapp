@@ -32,5 +32,10 @@ export class StorePage implements OnInit {
     ).subscribe();
   }
 
+  getGoogleLink(store) {
+    const link = (store.address1 || '') + ' ' + (store.address2 || '') + ' ' + (store.city || '') + ' ' + (store.country || '');
+    return encodeURIComponent(link);
+  }
+
 
 }

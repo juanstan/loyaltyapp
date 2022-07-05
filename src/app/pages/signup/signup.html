@@ -7,30 +7,31 @@
     <h1 class="title-login">
       <span>Register</span>
     </h1>
+    <div class="form-container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">First Name</ion-label>
+        <ion-label color="light" position="floating">First Name</ion-label>
         <ion-input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Last Name</ion-label>
+        <ion-label color="light" position="floating">Last Name</ion-label>
         <ion-input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Phone Number</ion-label>
+        <ion-label color="light" position="floating">Phone Number</ion-label>
         <ion-input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Email</ion-label>
+        <ion-label color="light" position="floating">Email</ion-label>
         <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="ion-text-start">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Date of Birth</ion-label>
+        <ion-label color="light" position="floating">Date of Birth</ion-label>
         <ion-input
           value="{{ f.date_of_birth.value | date: 'dd.mm.yyyy' }}"
           id="date"
@@ -50,7 +51,7 @@
         </ion-popover>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Gender</ion-label>
+        <ion-label color="light" position="floating">Gender</ion-label>
         <ion-select value="{{ f.gender.value}}" okText="Okay" cancelText="Dismiss" formControlName="gender" class="form-control">
           <ion-select-option value="male" >Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
@@ -58,7 +59,7 @@
         </ion-select>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Country</ion-label>
+        <ion-label color="light" position="floating">Country</ion-label>
         <ion-select
           value="{{ f.country.value}}"
           okText="Okay"
@@ -70,7 +71,7 @@
         </ion-select>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Region</ion-label>
+        <ion-label color="light" position="floating">Region</ion-label>
         <ion-select
           value="{{ f.region.value}}"
           okText="Okay"
@@ -82,7 +83,7 @@
         </ion-select>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">City</ion-label>
+        <ion-label color="light" position="floating">City</ion-label>
         <ion-select
           value="{{ f.city.value}}"
           okText="Okay"
@@ -93,12 +94,12 @@
         </ion-select>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Password</ion-label>
+        <ion-label color="light" position="floating">Password</ion-label>
         <ion-input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
         </ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label color="light" position="fixed">Password Confirmation</ion-label>
+        <ion-label color="light" position="floating">Password Confirmation</ion-label>
         <ion-input type="password" formControlName="password_confirmation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password_confirmation.errors }">
         </ion-input>
       </ion-item>
@@ -129,6 +130,7 @@
     </div>
 
   </form>
+    </div>
   </div>
 
 </ion-content>
