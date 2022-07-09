@@ -1,15 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!--<ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title class="color-site">History</ion-title>
+    </ion-buttons>-->
+    <ion-title class="center color-site">
+      <div>{{user.name}}</div>
+      <!--<div>({{user.card_number}})</div>-->
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="overlay overlay-show">
   <div class="container">
-    <ion-grid *ngIf="(program$ | async) as program">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="center">
+        <qrcode [qrdata]="''+user.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+      <ion-grid *ngIf="(program$ | async) as program">
       <ion-row>
         <ion-col>
           <div class="left">
@@ -56,6 +69,6 @@
   </div>
 
   <ng-template #indicator>
-    <div>Loading</div>
+    <div><img src="assets/img/loading.gif"></div>
   </ng-template>
 </ion-content>

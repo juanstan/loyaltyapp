@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {JwtInterceptor} from './core/interceptor/jwt.interceptor';
 import {AlertComponent} from './shared/components/alert/alert.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {AlertComponent} from './shared/components/alert/alert.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    QRCodeModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot({
       name: '__mydb',

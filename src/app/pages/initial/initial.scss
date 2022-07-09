@@ -4,6 +4,11 @@ ion-toolbar{
 ion-title, ion-menu-button {
   --color: white;
 }
+
+.center{
+  text-align: center;
+}
+
 ion-content{
   --ion-background-color:white;
   height: 100vh!important;

@@ -9,6 +9,7 @@ export class User {
   timezone: string;
   language: string;
   locale: Date;
+  card_number: string;
   customer_count?: number;
   demo?: number;
   expires_at?: string;
