@@ -13,9 +13,7 @@ ion-content{
   --ion-background-color:white;
   height: 100vh!important;
   margin: 10px;
-  .container{
-    margin: 10px;
-  }
+
   // --background: beige;
 
   .geo-logo {
@@ -54,6 +52,31 @@ ion-content{
     .right-space {
       padding-right: 5px;
     }
+  }
+
+  .card {
+    border-color: #3E9E88;
+    .home-points {
+      margin: 0;
+      overflow-x: hidden !important;
+      font-size: .875rem;
+      color: #000444;
+      letter-spacing: .1px;
+      line-height: 1.5;
+
+      .h5 {
+        font-size: 17.5px !important
+      }
+
+      h6 {
+        color: #3E9E88 !important;
+        font-size: 11px;
+      }
+    }
+  }
+
+  .history-home{
+    margin-top: 30px;
   }
 
 }

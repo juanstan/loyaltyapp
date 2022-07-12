@@ -21,25 +21,36 @@
       </ion-row>
     </ion-grid>
 
-
-      <ion-grid *ngIf="(program$ | async) as program">
+    <ion-grid *ngIf="(program$ | async) as program">
       <ion-row>
         <ion-col>
-          <div class="left">
-            <div class="header">Points available</div>
-            <div class="value">{{program.points_earned}}</div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col text-center home-points">
+                  <span class="h5  fw-bold">{{program.points_earned}}</span>
+                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Points available</h6>
+                </div><!--end col-->
+              </div> <!-- end row -->
+            </div><!--end card-body-->
           </div>
         </ion-col>
-        <ion-col class="left-10">
-          <div class="right">
-            <div class="header">Points spent</div>
-            <div class="value">{{program.points_balance - program.points_redeem}}</div>
+        <ion-col>
+          <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col text-center home-points">
+                  <span class="h5  fw-bold">{{program.points_balance - program.points_redeem}}</span>
+                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Points spent</h6>
+                </div><!--end col-->
+              </div> <!-- end row -->
+            </div><!--end card-body-->
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <ion-grid *ngIf="histories$ | async as histories; else indicator">
+    <ion-grid *ngIf="histories$ | async as histories; else indicator" class="history-home">
       <ion-row *ngFor="let history of histories" class="record-row">
         <ion-col>
           <div class="header-history color-site">

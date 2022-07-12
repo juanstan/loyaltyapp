@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { StorePage } from './store';
 import { StorePageRoutingModule } from './store-routing.module';
-import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 
 @NgModule({
   imports: [
@@ -13,9 +12,6 @@ import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
     FormsModule,
     IonicModule,
     StorePageRoutingModule
-  ],
-  providers: [
-    LaunchNavigator
   ],
   declarations: [
     StorePage

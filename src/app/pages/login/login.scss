@@ -1,13 +1,13 @@
 ion-content{
-  --ion-background-color:radial-gradient(180% 140% at bottom, #3E9E88 55%, white 45%) !important;
+ /* --background: radial-gradient(180% 140% at bottom, #3E9E88 55%, white 45%) !important;*/
+  --background: #002152;
   height: 100vh!important;
 
   .content-login {
-    top: 12%;
     position: relative;
     h1 {
       margin-top: 20px;
-      font-size: 40px;
+      font-size: 28px;
       text-align: center;
       color: white;
       text-transform: uppercase;
@@ -36,8 +36,6 @@ ion-content{
       width: 60%;
       height: 40px;
       margin: auto;
-      border-radius: 25px;
-      border-radius: 25px;
       &:first-child {
         margin-bottom: 15px;
       }
@@ -63,7 +61,7 @@ ion-content{
 }
 
 .login-logo img {
-  max-width: 90%;
+  max-width: 50%;
 }
 
 .list {
