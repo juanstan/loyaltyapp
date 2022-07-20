@@ -40,7 +40,6 @@ export class RegionService {
             name: region.val
           };
         });
-        debugger;
         return this.regions;
       }),
       catchError((err, caught) => {

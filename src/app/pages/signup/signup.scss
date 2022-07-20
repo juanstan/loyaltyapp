@@ -94,8 +94,11 @@ ion-content{
   }
 
   .form-btn-login {
-    margin:10px 0;
+    margin:15px;
     text-align: center;
+    .btn-right{
+      margin-left:25px;
+    }
     .btn, a{
       margin: 10px;
       padding:17px;
@@ -148,3 +151,11 @@ ion-content{
 .popover-content {
   top:50% !important;
 }
+
+.error-container {
+  margin-left: 20px;
+  .invalid-feedback {
+    display: inline;
+  }
+}
+

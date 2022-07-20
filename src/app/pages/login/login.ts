@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../providers/account.service';
 import { first } from 'rxjs/operators';
 import {AlertService} from '../../shared/services/alert.service';
+import {LoadingController} from '@ionic/angular';
 
 
 @Component({
@@ -15,13 +16,15 @@ export class LoginPage implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -43,8 +46,15 @@ export class LoginPage implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 3000,
+      spinner: 'circles'
+    });
+    loading.present();
+    this.error = '';
 
     // reset alerts on submit
     this.alertService.clear();
@@ -56,12 +66,18 @@ export class LoginPage implements OnInit {
 
     this.accountService.login(this.f.username.value, this.f.password.value).pipe(first())
       .subscribe({
-        next: async (data) => {
-          await this.accountService.loadAllData().subscribe((user) => {
+        next: async () => {
+          await this.accountService.loadAllData().subscribe((login) => {
+            loading.dismiss();
+            if (!login.user.email_verified_at) {
+              this.error = 'Customer no verified';
+              return;
+            }
             this.router.navigateByUrl('/');
           });
         },
         error: response => {
+          this.error = 'Username or Password incorrect';
           for (const key in response.error) {
            response.error[key]?.map(item => {
              this.alertService.error(item);

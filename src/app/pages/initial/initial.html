@@ -1,13 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <!--<ion-buttons slot="start">
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>-->
-    <ion-title class="center color-site">
-      <div>{{user.name}}</div>
-      <!--<div>({{user.card_number}})</div>-->
+    </ion-buttons>
+    <ion-title class="position-logo-center color-site"><!--Home-->
+      <!--<div><img src="assets/img/logo_yalla_rewards_yw.svg" alt="Ionic logo" width="35"></div>-->
     </ion-title>
-
   </ion-toolbar>
 </ion-header>
 
@@ -15,8 +13,9 @@
   <div class="container">
     <ion-grid>
       <ion-row>
-        <ion-col class="center">
-        <qrcode [qrdata]="''+user.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <ion-col class="center title">
+          {{user.name}}
+          <qrcode [qrdata]="''+user.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -28,8 +27,8 @@
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col text-center home-points">
-                  <span class="h5  fw-bold">{{program.points_earned}}</span>
-                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Points available</h6>
+                  <span class="h5  fw-bold">{{program.points_earned + program.points_redeemed}}</span>
+                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Available Points</h6>
                 </div><!--end col-->
               </div> <!-- end row -->
             </div><!--end card-body-->
@@ -40,12 +39,17 @@
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col text-center home-points">
-                  <span class="h5  fw-bold">{{program.points_balance - program.points_redeem}}</span>
-                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Points spent</h6>
+                  <span class="h5  fw-bold">{{program.points_balance - program.points_earned}}</span>
+                  <h6 class="text-uppercase text-muted mt-2 m-0 font-11">Balance Points</h6>
                 </div><!--end col-->
               </div> <!-- end row -->
             </div><!--end card-body-->
           </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="next-purchase">(You will save <span class="amount">{{program.discount_balance}} {{program.symbol}}</span> on your next purchase)</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -54,18 +58,20 @@
       <ion-row *ngFor="let history of histories" class="record-row">
         <ion-col>
           <div class="header-history color-site">
-            <span class="time right-space">{{history.updated_at | date:'mediumDate'}} - </span>
+            <span class="time right-space">{{history.updated_at | date:'MMM d, yyyy H:m'}} - </span>
             <span class="reason" [ngSwitch]="history.event_id">
-              <span *ngSwitchCase="1">Online shopping</span>
+              <span *ngSwitchCase="1">Purchase</span>
               <span *ngSwitchCase="2">Cancel Points</span>
               <span *ngSwitchCase="3">Redeem Points</span>
-              <span *ngSwitchCase="4">Signup</span>
+              <span *ngSwitchCase="4">Signup Points</span>
+              <span *ngSwitchCase="13">First Purchase</span>
+              <span *ngSwitchCase="14">Manually Added Points</span>
             </span>
           </div>
           <div class="top-space-item" *ngIf="history.items?.length > 0">
             <div *ngFor="let item of history.items">
-              <span class="item-id">1.</span>
-              <span class="item">O'neill Standard zip hoodie</span>
+              <span class="item-id">{{item.id}}</span>
+              <span class="item">{{item.name}}</span>
             </div>
           </div>
           <div class="top-space-item">
@@ -80,6 +86,6 @@
   </div>
 
   <ng-template #indicator>
-    <div><img src="assets/img/loading.gif"></div>
+    <div><!--<img src="assets/img/loading.gif">--> No histories record yet</div>
   </ng-template>
 </ion-content>

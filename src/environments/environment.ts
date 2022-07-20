@@ -5,8 +5,12 @@
 export const environment = {
   production: false,
   apiUrl: 'https://loyalty.bondly.io/api',
+  /*program: 'Yalla Rewards',
+  program_id: 31,
+  user_id: 174*/
   program: 'Yalla',
-  program_id: 2
+  program_id: 2,
+  user_id: 2
 };
 
 /*

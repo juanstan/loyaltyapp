@@ -37,6 +37,12 @@
           <div *ngIf="f.password.errors.required">Password is required</div>
         </div>
 
+        <div *ngIf="loading">
+          <img src="assets/img/loading-icon.gif" width="100" />
+        </div>
+
+        <div class="error" *ngIf="error">({{error}})</div>
+
         <div class="forgot-your-password">Forgot your passowrd</div>
         <div class="forgot-your-password">
           <a routerLink="/register">Sign up</a>

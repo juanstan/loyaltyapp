@@ -70,7 +70,7 @@ export class AccountService {
           this.loginObj = {
             token: login.token,
             last_login: moment().format()
-          } ;
+          };
           return this.loginObj;
         })
       );
@@ -94,9 +94,14 @@ export class AccountService {
       gender: user.gender,
       email: user.email,
       date_of_birth: user.date_of_birth,
+      country_id: +user.country,
+      region_id: +user.region,
+      city_id: +user.city,
+      phone: user.phone,
       password: user.password,
       password_confirmation: user.password_confirmation,
       program_id: environment.program_id,
+      created_by: environment.user_id,
       active: 0
     };
 
@@ -150,11 +155,15 @@ export class AccountService {
                 return this.http.get(`${environment.apiUrl}/app/customer/${dataCustomer.uuid}`).pipe(
                   map((customer: any) => {
                     this.loginObj.user = this.userValue = dataCustomer;
-                    const programInfo = customer.programs.find(pro => pro.id === program.programID);
-                    this.programService.program$.next(programInfo);
-                    this.historyService.allHistories = programInfo.histories;
-                    this.storageService.set('program', programInfo);
-                    this.storageService.set('login', this.loginObj);
+                    // If the user is verified we keep his info
+                    if (dataCustomer.email_verified_at) {
+                      const programInfo = customer.programs.find(pro => pro.id === program.programID);
+                      this.programService.program$.next(programInfo);
+                      this.historyService.allHistories = programInfo?.histories;
+                      this.storageService.set('program', programInfo);
+                      this.storageService.set('login', this.loginObj);
+                    }
+                    return this.loginObj;
                   })
                 );
               })
@@ -162,10 +171,10 @@ export class AccountService {
           })
         );
       }),
-    catchError(errorForFirstOrSecondCall => {
-      console.error('An error occurred: ', errorForFirstOrSecondCall);
+    catchError(error => {
+      console.error('An error occurred: ', error);
       // if you want to handle this error and return some empty data use:
-      throw new Error('Error: ' + errorForFirstOrSecondCall.message);
+      throw new Error(error);
     }));
 
   }

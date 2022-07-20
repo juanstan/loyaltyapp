@@ -3,13 +3,15 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Account</ion-title>
+    <ion-title>Account
+      <!--<div><img src="assets/img/logo_yalla_rewards_yw.svg" alt="Ionic logo" width="35"></div>-->
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="user?.email" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <img class="avatar" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
     <h2>{{user.email}}</h2>
     <ion-list inset>
       <ion-item>

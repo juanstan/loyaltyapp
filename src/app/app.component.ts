@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UserData } from './providers/user-data';
 import {AccountService} from './providers/account.service';
 import {StorageService} from './core/services/storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -18,26 +19,26 @@ import {StorageService} from './core/services/storage.service';
 })
 export class AppComponent implements OnInit {
   appPages = [
-    /*{
+    {
       title: 'Home',
-      url: '/',
+      url: '/app/tabs/home',
       icon: 'home'
-    },*/
-    /*{
-      title: 'My Profile',
-      url: '/app/tabs/account',
-      icon: 'person'
-    },*/
+    },
+    {
+      title: 'Stores',
+      url: '/app/tabs/store',
+      icon: 'storefront'
+    },
     {
       title: 'About Yalla Rewards',
       url: '/app/tabs/about',
       icon: 'information-circle'
     },
     {
-      title: 'Support',
-      url: '/support',
-      icon: 'help'
-    }
+      title: 'My Profile',
+      url: '/app/tabs/account',
+      icon: 'person'
+    },
   ];
   loggedIn = false;
   dark = false;
@@ -77,10 +78,21 @@ export class AppComponent implements OnInit {
       return this.router.navigateByUrl('/login');
     }
 
+    this.checkIfSystemHasToLogoutUser();
+
     this.loggedIn = true;
     return await this.accountService.loadAllData().subscribe();
 
   }
+
+
+  checkIfSystemHasToLogoutUser() {
+    const last_login = this.accountService?.loginObj?.last_login;
+    if (last_login && moment().isSameOrAfter(moment(last_login).add(4, 'hours'))) {
+      this.accountService.logout();
+    }
+  }
+
 
   checkLogout(title) {
     if (title === 'Logout') {

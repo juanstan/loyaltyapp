@@ -1,15 +1,20 @@
 ion-toolbar{
   --background: #002152;
+  opacity: 1;
 }
 ion-title, ion-menu-button {
   color: white;
 }
-img {
-  max-width: 140px;
-  border-radius: 50%;
-}
 .color-site{
   color: #002152;
+}
+
+.center{
+  text-align: center;
+}
+
+.position-logo-center{
+  margin-left:31%;
 }
 
 .info-rest {

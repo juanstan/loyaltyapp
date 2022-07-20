@@ -8,6 +8,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'verify',
+    loadChildren: () => import('./pages/verify/verify.module').then(m => m.VerifyModule)
+  },
+  {
     path: 'support',
     loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
   },

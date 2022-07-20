@@ -17,4 +17,6 @@ export class User {
   plan_name?: string;
   available_points?: number;
   balance?: number;
+  verification_code?: string;
+  email_verified_at?: string;
 }
