@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HistoryService} from '../../providers/history.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {History} from '../../model/history';
@@ -9,6 +9,7 @@ import {ProgramService} from '../../providers/program.service';
 import {Program} from '../../model/program';
 import {delay, finalize, tap} from 'rxjs/operators';
 import {Currency} from '../../model/currency';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'page-initial',
@@ -22,6 +23,8 @@ export class InitialPage implements OnInit {
   user: User;
   currencies: Currency[];
   loaded: boolean;
+  histories: History[];
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   constructor(
     private historyService: HistoryService,
@@ -33,7 +36,9 @@ export class InitialPage implements OnInit {
   }
 
   ngOnInit() {
-    this.histories$ = this.historyService.getHistoriesObservable();
+    this.histories$ = this.historyService.getHistoriesObservable().pipe(tap(histories => {
+      this.histories = histories;
+    }));
     this.program$ = this.programService.getProgramObservable().pipe(tap(program => {
       this.currencies = program?.currencies;
     }));
@@ -42,6 +47,23 @@ export class InitialPage implements OnInit {
 
   checkCurrency(currency_id) {
     return this.currencies.find(currency => currency.id === currency_id)?.code;
+  }
+
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.histories.length === 1000) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
 

@@ -45,6 +45,7 @@ ion-content{
         --background: white;
         text-align: center;
         --padding-start: 10px;
+        caret-color: auto;
       }
     }
     .name-form{
@@ -157,5 +158,9 @@ ion-content{
   .invalid-feedback {
     display: inline;
   }
+}
+
+::ng-deep .picker-item-active {
+  color: red !important;
 }
 

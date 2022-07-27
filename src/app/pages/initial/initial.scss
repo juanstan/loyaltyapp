@@ -26,6 +26,15 @@ ion-content{
 
   // --background: beige;
 
+  .spinner{
+    text-align:center;
+    transform: scale(3);
+    svg {
+        stroke: #444;
+        fill: #222;
+    }
+  }
+
   .geo-logo {
     text-align: center;
   }
@@ -54,8 +63,6 @@ ion-content{
   }
 
   .record-row{
-    border-bottom: 2px #ccc solid;
-    padding:5px 0;
     .top-space-item{
       padding-top: 8px;
     }
@@ -64,12 +71,26 @@ ion-content{
     }
   }
 
+  ion-card-content{
+    // background-color: #002152;
+    background: linear-gradient(
+        to bottom,
+        #002152,
+        #002152 2.75rem,
+        transparent 1rem,
+        transparent 100%
+    );
+    .header-history{
+      padding-bottom: 12px;
+    }
+  }
+
   .card {
-    background-color: #002152;
+    background-color: #FECC07;
     .home-points {
       margin: 0;
       overflow-x: hidden !important;
-      color: #fff;
+      color: #002152;
       letter-spacing: .1px;
       line-height: 1.5;
 
@@ -78,7 +99,7 @@ ion-content{
       }
 
       h6 {
-        color: #fff !important;
+        color: #002152 !important;
         font-size: 11px;
       }
     }
@@ -86,14 +107,30 @@ ion-content{
 
   .history-home{
     margin-top: 30px;
+    .reason {
+      font-weight: bolder;
+      font-size:18px;
+      color:white;
+    }
+    .time{
+      color: #fff;
+      float:right;
+    }
+    .bold{
+      font-weight: bolder;
+    }
   }
 
   .next-purchase {
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     .amount {
       font-weight: bolder;
     }
+  }
+
+  .name-product {
+    font-weight: bolder;
   }
 
 }

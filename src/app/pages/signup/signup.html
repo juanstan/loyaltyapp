@@ -30,7 +30,7 @@
       <ion-item lines="none">
         <ion-label color="light" position="stacked">Date of Birth</ion-label>
         <ion-input
-          value="{{ f.date_of_birth.value | date: 'dd.mm.yyyy' }}"
+          value="{{ f.date_of_birth.value | date: 'dd.MM.yyyy' }}"
           id="date"
           class="ion-text-start"
           [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }"
@@ -155,7 +155,7 @@
       <div *ngIf="submitted && f.password_confirmation?.errors" class="invalid-feedback">
         <div>Password confirmation is required</div>
       </div>
-      <div *ngIf="submitted && form.errors.MatchFields" class="invalid-feedback">
+      <div *ngIf="submitted && form?.errors?.MatchFields" class="invalid-feedback">
         <div>Password has to be the same in both fields</div>
       </div>
     </div>
