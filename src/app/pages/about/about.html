@@ -3,11 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title><!--About-->
-      <div>About
-        <!--<img src="assets/img/logo_yalla_rewards_yw.svg" alt="Ionic logo" width="35">-->
-      </div>
-    </ion-title>
+    <ion-title  class="title-color">About</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,14 +25,14 @@
       <ion-row>
         <ion-col>
           <div class="title">Where it’s available</div>
-          <div class="description">Yalla Rewards is available on any stores and websites of the following brands: Beyond The Beach, Beyond The Bike, Rip Curl, Oakley, Giant Bicycles, Seafolly, Tommy Bahama and more… See all stores ></div>
+          <div class="description">Yalla Rewards is available on any stores and websites of the following brands: Beyond The Beach, Beyond The Bike, Rip Curl, Oakley, Giant Bicycles, Seafolly, Tommy Bahama and more… <a [routerLink]="['/app/tabs/store']">See all stores ></a></div>
         </ion-col>
       </ion-row>
     </ion-grid>
 
     <ion-grid>
       <ion-row>
-        <ion-col class="center title">
+        <ion-col class="title">
           FAQs
         </ion-col>
       </ion-row>

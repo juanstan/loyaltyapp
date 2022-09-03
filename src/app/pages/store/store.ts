@@ -15,7 +15,9 @@ import * as _ from 'lodash';
 export class StorePage implements OnInit {
 
   stores$: Observable<[{id: number, name: string, stores: Store[]}]>;
+  websites$: Observable<any[]>;
   storesByProgram;
+  location: string;
 
   constructor(
     public router: Router,
@@ -23,7 +25,9 @@ export class StorePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.location = 'stores';
     this.stores$ = this.storeService.requestStoresBusinessByProgram();
+    this.websites$ = this.storeService.requestWebsitesByProgram();
     this.storeService.requestStoresByProgram().pipe(
       first(),
       map(data => {
@@ -35,6 +39,10 @@ export class StorePage implements OnInit {
   getGoogleLink(store) {
     const link = (store.address1 || '') + ' ' + (store.address2 || '') + ' ' + (store.city || '') + ' ' + (store.country || '');
     return encodeURIComponent(link);
+  }
+
+  segmentChanged(ev: any) {
+    this.location = ev.detail?.value || this.location;
   }
 
 

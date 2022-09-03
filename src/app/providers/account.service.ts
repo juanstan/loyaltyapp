@@ -56,6 +56,7 @@ export class AccountService {
 
   public set userValue(user: User) {
     this.user = user;
+    this.loginObj.user = user;
   }
 
   public get tokenValue(): string {
@@ -94,6 +95,7 @@ export class AccountService {
       gender: user.gender,
       email: user.email,
       date_of_birth: user.date_of_birth,
+      nationality: user.nationality,
       country_id: +user.country,
       region_id: +user.region,
       city_id: +user.city,
@@ -116,8 +118,26 @@ export class AccountService {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
   }
 
-  update(id, params) {
-    return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+  update(user) {
+    const obj = {
+      name: user.name,
+      gender: user.gender,
+      email: user.email,
+      date_of_birth: user.date_of_birth,
+      nationality: user.nationality,
+      country_id: +user.country,
+      region_id: +user.region,
+      city_id: +user.city,
+      phone: user.phone,
+      password: user.password,
+      password_confirmation: user.password_confirmation,
+      program_id: environment.program_id,
+      created_by: environment.user_id,
+      sendVerification: false,
+      active: 0
+    };
+    return this.http.post(`${environment.apiUrl}/customer/save`, obj);
+    /*return this.http.post(`${environment.apiUrl}/users/${id}`, params)
       .pipe(map(x => {
         // update stored user if the logged in user updated their own record
         if (id === this.userValue.id) {
@@ -127,7 +147,7 @@ export class AccountService {
           this.storageService.set('login', this.loginObj);
         }
         return x;
-      }));
+      }));*/
   }
 
   delete(id: string) {

@@ -4,10 +4,17 @@ export class User {
   name: string;
   email: string;
   role: number;
+  gender: string;
   avatar: string;
   currency: string;
   timezone: string;
   language: string;
+  nationality: string;
+  country_id: number;
+  region_id: number;
+  city_id: number;
+  phone: string;
+  date_of_birth: string;
   locale: Date;
   card_number: string;
   customer_count?: number;

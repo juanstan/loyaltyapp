@@ -31,8 +31,8 @@ export class CityService {
     return this.cities.find(region => region.id === id);
   }
 
-  public getCitysReq(city_id: number): Observable<City[]> {
-    return this.http.get<{places: any}>(`${environment.apiUrl}/citiesbyregion/${city_id}`).pipe(
+  public getCitysReq(region_id: number): Observable<City[]> {
+    return this.http.get<{places: any}>(`${environment.apiUrl}/citiesbyregion/${region_id}`).pipe(
       map(data => {
         this.cities = data.places.map(region => {
           return {

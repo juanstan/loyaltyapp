@@ -11,6 +11,28 @@ ion-title, ion-menu-button {
   font-size: 25px;
 }
 
+.title-color{
+  color: #FECC07;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.currency{
+  padding-left: 2px;
+}
+
+.items-container {
+  padding: 10px 0;
+  border-bottom: 1px #002152 solid;
+  margin-bottom: 11px;
+  .item-title{
+    font-weight: bolder;
+  }
+  .sku-title{
+    text-transform: uppercase;
+  }
+}
+
 .center{
   text-align: center;
 }
@@ -123,7 +145,7 @@ ion-content{
 
   .next-purchase {
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     .amount {
       font-weight: bolder;
     }

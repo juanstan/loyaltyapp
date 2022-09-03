@@ -61,6 +61,18 @@ export class StoreService {
     );
   }
 
+  public requestWebsitesByProgram(): Observable<any[]> {
+    return this.http.get<{websites: any[]}>(`${environment.apiUrl}/websitesbyprogram/${environment.program_id}`).pipe(
+      map(data => {
+        return data?.websites;
+      }),
+      catchError((err, caught) => {
+        console.log(err);
+        return EMPTY;
+      })
+    );
+  }
+
 
 
 }

@@ -3,9 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Account
-      <!--<div><img src="assets/img/logo_yalla_rewards_yw.svg" alt="Ionic logo" width="35"></div>-->
-    </ion-title>
+    <ion-title class="title-color">Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,10 +19,6 @@
       <ion-item>
         <ion-label color="secondary" position="fixed" class="color-site">Email:</ion-label>
         {{user.email}}
-      </ion-item>
-      <ion-item>
-        <ion-label color="secondary" position="fixed" class="color-site">Role:</ion-label>
-        {{user.role}}
       </ion-item>
       <ion-item (click)="logout()" class="color-site underline">Logout</ion-item>
     </ion-list>

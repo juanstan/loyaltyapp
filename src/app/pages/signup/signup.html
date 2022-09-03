@@ -63,6 +63,18 @@
         </ion-select>
       </ion-item>
       <ion-item lines="none">
+        <ion-label color="light" position="stacked">Nationality</ion-label>
+        <ion-select
+          value="{{ f.nationality?.value}}"
+          okText="Okay"
+          cancelText="Dismiss"
+          formControlName="nationality"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }">
+          <ion-select-option value="{{country.name}}" *ngFor="let country of countries$ | async">{{country.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
         <ion-label color="light" position="stacked">Country</ion-label>
         <ion-select
           value="{{ f.country.value}}"
