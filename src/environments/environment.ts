@@ -8,7 +8,7 @@ export const environment = {
   /*program: 'Yalla Rewards',
   program_id: 31,
   user_id: 174*/
-  program: 'Yalla',
+  program: 'Yalla Rewards',
   program_id: 2,
   user_id: 2
 };

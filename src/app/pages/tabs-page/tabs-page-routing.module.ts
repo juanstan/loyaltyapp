@@ -37,7 +37,12 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('../initial/initial.module').then(m => m.InitialModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../initial/initial.module').then(m => m.InitialModule)
+          }
+        ]
       }
     ]
   }

@@ -37,7 +37,8 @@ export class AccountService {
     return await this.storageService.get('login').then(
       login => {
         if (!login?.user) {
-          return this.logout();
+          this.logout();
+          return null;
         }
         this.user = login.user;
         return this.loginObj = login;
